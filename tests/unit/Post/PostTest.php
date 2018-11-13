@@ -304,6 +304,14 @@ class PostTest extends WP_UnitTestCase
         $this->assertNull($model);
     }
 
+    /** @test */
+    public function it_can_access_the_related_terms(){
+        $model = TestPost::create([
+            'post_title' => 'OG Title'
+        ]);
+        wp_set_object_terms($model->id, 'awesome', 'category');
+        $this->assertEquals(1, $model->categories()->count());
+    }
 }
 
 class CustomTypeStub extends Post
@@ -313,5 +321,14 @@ class CustomTypeStub extends Post
     public static function __register()
     {
         register_post_type(static::POST_TYPE);
+    }
+}
+
+class TestPost extends Post
+{
+    use \App\Concerns\HasRelationships;
+    public function categories()
+    {
+        return $this->hasOneOrMany(Category::class);
     }
 }
