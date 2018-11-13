@@ -326,7 +326,7 @@ class CustomTypeStub extends Post
 
 class TestPost extends Post
 {
-    use \App\Concerns\HasRelationships;
+    use \Silk\Concerns\HasRelationships;
     public function categories()
     {
         return $this->hasOneOrMany(Category::class);

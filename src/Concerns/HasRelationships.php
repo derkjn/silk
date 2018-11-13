@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Concerns;
+namespace Silk\Concerns;
 
 use App\Post\Model as PostModel;
 use App\Term\Model as TermModel;
